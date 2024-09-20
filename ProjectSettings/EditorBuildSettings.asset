@@ -6,6 +6,39 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Main_Menu_Scene.unity
+    guid: d749eee48a266fe4dbfe9a0589e932e2
+  - enabled: 1
+    path: Assets/Scenes/(1)_Introduction_Cutscene.unity
+    guid: d0e10025cb60cc542b61e69b55876605
+  - enabled: 1
+    path: Assets/Scenes/(2)_Level_1_Goblin_Battle.unity
+    guid: 8af3477437cf8f2498808b27fa9848d2
+  - enabled: 1
+    path: Assets/Scenes/(3)_Defeated_Golbins_New_Item_Cutscene.unity
+    guid: 84f0f68d421912941979eef1542e79da
+  - enabled: 1
+    path: Assets/Scenes/(4)_Encounters_Wizard_Battle.unity
+    guid: 738992b13a001d042af94a8815bce1cd
+  - enabled: 1
+    path: Assets/Scenes/(5)Wizard_Cutscene+NewItem.unity
+    guid: c4a86622eb4ff4d4aae4e7d7e52d3c1f
+  - enabled: 1
+    path: Assets/Scenes/(6)_Troll_Battle.unity
+    guid: 52733d5d01267f6438f2098bea9acf8c
+  - enabled: 1
+    path: Assets/Scenes/(7)_Troll_cutscene_NewItem.unity
+    guid: b2e230523a6e8f748806e8513e418101
+  - enabled: 1
+    path: Assets/Scenes/(8)_Royal_Enforcer_Battle.unity
+    guid: 68ed57e54be892a42b5e514caa716ec2
+  - enabled: 1
+    path: Assets/Scenes/(9)_Cutscene_NewItem.unity
+    guid: 10f16e15916ff0b4a984a6f17978f33f
+  - enabled: 1
+    path: Assets/Scenes/(10)Text_Self_Battle.unity
+    guid: c119c36d0a78b5145b49e1b219c4903d
+  - enabled: 1
+    path: Assets/Scenes/(11)_final_Cutscene_realization.unity
+    guid: 9baa060b9f1fc36439120aab76f022ba
   m_configObjects: {}

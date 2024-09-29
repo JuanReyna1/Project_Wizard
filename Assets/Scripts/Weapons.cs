@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    int dmg;
+    string unitName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void setName(string name) {  this.unitName = name; }
+
+    public void setDamage(int damage) { dmg  = damage; }
+
+    public string getName() { return this.unitName;}
+
+    public int getDamage() { return dmg;}
+
 }

@@ -7,6 +7,8 @@ public class Unit_Class : MonoBehaviour
 
     private string name1 = "";
     private int health;
+    private int burn;
+    private int stuned;
     private Weapons[] enemyArsenal = new Weapons[2];
 
     //Setters

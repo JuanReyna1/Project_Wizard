@@ -48,12 +48,6 @@ public class Turn_Based_Logic : MonoBehaviour
         bckGround = txtDisplay.transform.parent.gameObject;
         display = txtDisplay.GetComponent<TMP_Text>();
         currentState = Battle_State.Start;
-        StartCoroutine(startBattle());
-
-    }
-
-    IEnumerator startBattle()
-    {
 
         GameObject player = Instantiate(playerPreFab, playerPos);
         playerUnit = player.GetComponent<Unit_Class>();
@@ -62,6 +56,14 @@ public class Turn_Based_Logic : MonoBehaviour
         playerW.setWeapon(0, 10, "Warlock Punch");
         playerW.setWeapon(1, 15, "Spiked Wand");
 
+        StartCoroutine(startBattle());
+
+    }
+
+    IEnumerator startBattle()
+    {
+
+        //Implement RNG for enemy choice
         GameObject enemyGO = Instantiate(enemyPreFab, enemyPos);
         enemyUnit = enemyGO.GetComponent<Unit_Class>();
         enemyUnit.setName("Goblin Patrol");
@@ -88,7 +90,7 @@ public class Turn_Based_Logic : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         //Display
-        bckGround.SetActive(false);
+        //bckGround.SetActive(false);
         display.text = "";
 
         currentState = Battle_State.PlayerTurn;
@@ -101,8 +103,35 @@ public class Turn_Based_Logic : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        enemyUnit.takeDmg(playerW.getWeapon(weaponSlot).getDamage());
-        enemyHealth.value = enemyUnit.getHealth();
+        if (weaponSlot <= 1)
+        {
+            enemyUnit.takeDmg(playerW.getWeapon(weaponSlot).getDamage());
+            enemyHealth.value = enemyUnit.getHealth();
+
+        }
+        else if (weaponSlot == 2)
+        {
+
+            switch (playerW.getWeapon(weaponSlot).name)
+            {
+                case "Fire":
+
+                    break;
+
+                case "Hobo Rage":
+
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+        {
+
+            playerW.setBlockChance(1);
+
+        }
 
         yield return new WaitForSeconds(2f);
 
@@ -117,23 +146,35 @@ public class Turn_Based_Logic : MonoBehaviour
         //currentState = Battle_State.EnemyTurn;
 
         //Display
-        bckGround.SetActive(true);
+        //bckGround.SetActive(true);
         display.text = "Enemy Turn";
 
         yield return new WaitForSeconds(3f);
 
-        int attackSlot = rng.Next(0, 1);
+        int attackSlot = rng.Next(0, 2);
 
-        playerUnit.takeDmg(enemyUnit.getWeapons(attackSlot).getDamage());
-        playerHealth.value = playerUnit.getHealth();
+        if (rng.Next(0, 2) == playerW.getBlockChance())
+        {
+            playerUnit.takeDmg(enemyUnit.getWeapons(attackSlot).getDamage());
+            playerHealth.value = playerUnit.getHealth();
 
-        if (playerUnit.getHealth() <= 0)
+            if (playerUnit.getHealth() <= 0)
+            {
+
+                currentState = Battle_State.Lost;
+                endGame();
+
+            }
+        }
+        else
         {
 
-            currentState = Battle_State.Lost;
-            endGame();
+            display.text = "Enemy missed";
+            playerW.setBlockChance(-1);
 
         }
+
+        yield return new WaitForSeconds(2f);
 
         currentState = Battle_State.PlayerTurn;
         playerTurn();
@@ -147,7 +188,7 @@ public class Turn_Based_Logic : MonoBehaviour
         Debug.Log("Your Turn.");
         
         //Display
-        bckGround.SetActive(true);
+        //bckGround.SetActive(true);
         display.text = "Player Turn";
 
         sysEv.SetActive(true);
@@ -162,15 +203,10 @@ public class Turn_Based_Logic : MonoBehaviour
         if (currentState == Battle_State.PlayerTurn)
         {
 
-            bckGround.SetActive(false);
+            //bckGround.SetActive(false);
             display.text = "";
 
-            if (attack <= 1)
-            {
-
-                StartCoroutine(attackEnemy(attack));
-
-            }
+            StartCoroutine(attackEnemy(attack));
 
         }
     }

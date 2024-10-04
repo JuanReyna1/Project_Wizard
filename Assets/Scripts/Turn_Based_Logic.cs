@@ -63,6 +63,9 @@ public class Turn_Based_Logic : MonoBehaviour
     IEnumerator startBattle()
     {
 
+        att1.GetComponentInChildren<TMP_Text>().text = playerW.getWeapon(0).getName();
+        att2.GetComponentInChildren<TMP_Text>().text = playerW.getWeapon(1).getName();
+
         //Implement RNG for enemy choice
         GameObject enemyGO = Instantiate(enemyPreFab, enemyPos);
         enemyUnit = enemyGO.GetComponent<Unit_Class>();
@@ -105,35 +108,56 @@ public class Turn_Based_Logic : MonoBehaviour
 
         if (weaponSlot <= 1)
         {
-            enemyUnit.takeDmg(playerW.getWeapon(weaponSlot).getDamage());
+
+            display.text = "Attacking with " + playerW.getWeapon(weaponSlot).getName() + ".";
+            enemyUnit.takeDmg(playerW.getDmgBonus() * playerW.getWeapon(weaponSlot).getDamage());
             enemyHealth.value = enemyUnit.getHealth();
 
         }
         else if (weaponSlot == 2)
         {
 
-            switch (playerW.getWeapon(weaponSlot).name)
+            switch (playerW.getSpPotion())
             {
                 case "Fire":
 
+                    display.text = "Higher Chance of Burn";
+
+                    playerW.setBurnChance(1);
                     break;
 
                 case "Hobo Rage":
 
+                    display.text = "Deal twice the damage";
+
+                    playerW.setDmgBonus(2);
+                    break;
+
+
+                case "Hobo Shield":
+
+                    display.text = "Have twice the health";
+
+                    playerUnit.setHealth(2 * playerUnit.getHealth());
                     break;
 
                 default:
 
                     break;
             }
-        }
-        {
 
+        }else{
+
+            display.text = "You have a chance to block the next attack.";
             playerW.setBlockChance(1);
 
         }
 
+        
+
         yield return new WaitForSeconds(2f);
+
+        display.text = "";
 
         currentState = Battle_State.EnemyTurn;
         StartCoroutine(enemyTurn());
@@ -153,7 +177,7 @@ public class Turn_Based_Logic : MonoBehaviour
 
         int attackSlot = rng.Next(0, 2);
 
-        if (rng.Next(0, 2) == playerW.getBlockChance())
+        if (rng.Next(0, 2) != playerW.getBlockChance())
         {
             playerUnit.takeDmg(enemyUnit.getWeapons(attackSlot).getDamage());
             playerHealth.value = playerUnit.getHealth();
@@ -170,9 +194,10 @@ public class Turn_Based_Logic : MonoBehaviour
         {
 
             display.text = "Enemy missed";
-            playerW.setBlockChance(-1);
 
         }
+
+        playerW.setBlockChance(-1);
 
         yield return new WaitForSeconds(2f);
 

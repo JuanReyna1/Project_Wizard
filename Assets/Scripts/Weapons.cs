@@ -5,8 +5,8 @@ using UnityEngine;
 public class Weapons : MonoBehaviour
 {
     
-    int dmg;
-    string unitName;
+    int dmg = 0;
+    string unitName = "";
 
     public void setName(string name) {  this.unitName = name; }
 

@@ -10,7 +10,7 @@ public class Weapons : MonoBehaviour
 
     public void setName(string name) {  this.unitName = name; }
 
-    public void setDamage(int damage) { dmg  = damage; }
+    public void setDamage(int damage) { dmg = damage; }
 
     public string getName() { return this.unitName;}
 

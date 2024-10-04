@@ -72,7 +72,10 @@ public class Turn_Based_Logic : MonoBehaviour
         enemyUnit.setName("Goblin Patrol");
         enemyUnit.setHealth(175);
         enemyUnit.setWeapon(0, 20, "Attack 1");
-        enemyUnit.setWeapon(0, 15, "Attack 2");
+        enemyUnit.setWeapon(1, 15, "Attack 2");
+
+        Debug.Log(enemyUnit.getWeapons(0).getDamage());
+        Debug.Log(enemyUnit.getWeapons(1).getDamage());
 
         //Test display here
         bckGround.SetActive(true);
@@ -179,6 +182,8 @@ public class Turn_Based_Logic : MonoBehaviour
 
         if (rng.Next(0, 2) != playerW.getBlockChance())
         {
+
+            Debug.Log(attackSlot);
             playerUnit.takeDmg(enemyUnit.getWeapons(attackSlot).getDamage());
             playerHealth.value = playerUnit.getHealth();
 

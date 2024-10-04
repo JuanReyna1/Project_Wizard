@@ -9,7 +9,7 @@ public class Unit_Class : MonoBehaviour
     private int health;
     private int burn;
     private int stuned;
-    private Weapons[] enemyArsenal = { new Weapons(), new Weapons() };
+    private Weapons[] enemyArsenal = new Weapons[2];
 
     //Setters
     public void setName(string newName) {  name1 = newName; }
@@ -19,7 +19,7 @@ public class Unit_Class : MonoBehaviour
     public void setWeapon(int slot, int damage, string nameW)
     {
 
-        //enemyArsenal[slot] = new Weapons();
+        enemyArsenal[slot] = gameObject.AddComponent<Weapons>();
         enemyArsenal[slot].setDamage(damage);
         enemyArsenal[slot].setName(nameW);
 
